@@ -1,1 +1,3 @@
-# DSA_CPP
+# Data Structures and Algorithms
+
+Repository to hold practicing DSA in C++
