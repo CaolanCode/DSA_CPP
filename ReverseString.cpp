@@ -2,9 +2,9 @@
     Reverse a character array
  */
 #include <iostream>
+#include <cstring>
 using namespace std;
 
-int Length(char name[]);
 void Reverse(char name[]);
 
 int main()
@@ -20,19 +20,11 @@ int main()
     return 0;
 }
 
-int Length(char name[])
-{
-    int size = 0;
-    
-    for(int i = 0; name[i]; i++) size++;
-    
-    return size;
-}
 
 void Reverse(char name[])
 {
     int start = 0;
-    int end = Length(name) - 1;
+    int end = strlen(name) - 1;
     
     while(start < end)
     {
