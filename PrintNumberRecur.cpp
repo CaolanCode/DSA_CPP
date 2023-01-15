@@ -4,7 +4,8 @@
 #include <iostream>
 using namespace std;
 
-int printCount(int n);
+void printAscend(int n);
+void printDescend(int n);
 
 int main()
 {
@@ -12,18 +13,28 @@ int main()
     cout << "Enter a number to count up to: ";
     cin >> n;
     
-    int result = printCount(n);
-    cout << result << endl;
+    printAscend(n);
+    cout << endl;
+    printDescend(n);
+    cout << endl;
     
     return 0;
 }
 
-int printCount(int n)
+void printAscend(int n)
 {
-    if(n == 1) return 1;
+    if(n == 0) return;
     
-    int smallNumber = printCount(n - 1);
-    cout << smallNumber << " ";
+    printAscend(n - 1);
     
-    return smallNumber + 1;
+    cout << n << " ";
+}
+
+void printDescend(int n)
+{
+    if(n == 0) return;
+    
+    cout << n << " ";
+    
+    printDescend(n - 1);
 }
