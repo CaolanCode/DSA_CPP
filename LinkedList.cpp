@@ -17,6 +17,8 @@ public:
     void append(int value);
     void prepend(int value);
     bool insert(int index, int value);
+    void deleteLast();
+    void deleteFirst();
     void printList();
     void getHead() const;
     void getTail() const;
@@ -55,6 +57,51 @@ void LinkedList::append(int value)
     length++;
 }
 
+void LinkedList::deleteLast()
+{
+    if(length == 0) return;
+    Node *temp = head;
+    if(length == 1) {
+        head = tail = nullptr;
+    } else {
+        Node *pre = head;
+        while(temp->next)
+        {
+            pre = temp;
+            temp = temp->next;
+        }
+        tail = pre;
+        tail->next = nullptr;
+    }
+    length--;
+    delete temp;
+}
+
+void LinkedList::prepend(int value)
+{
+    Node *newNode = new Node(value);
+    if(length == 0) {
+        head = tail = newNode;
+    } else {
+        newNode->next = head;
+        head = newNode;
+    }
+    length++;
+}
+
+void LinkedList::deleteFirst()
+{
+    if(length == 0) return;
+    Node *temp = head;
+    if(length == 1) {
+        head = tail = nullptr;
+    } else {
+        head = head->next;
+    }
+    delete temp;
+    length--;
+}
+
 void LinkedList::printList()
 {
     Node *temp = head;
@@ -80,13 +127,11 @@ void LinkedList::getLength() const
 
 int main()
 {
-    LinkedList *myLinkedList = new LinkedList(4);
+    LinkedList *myLinkedList = new LinkedList(2);
+    myLinkedList->append(3);
+    myLinkedList->prepend(1);
     
-    myLinkedList->append(2);
     myLinkedList->printList();
-    myLinkedList->getHead();
-    myLinkedList->getTail();
-    myLinkedList->getLength();
     
     delete myLinkedList;
     
