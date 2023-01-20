@@ -19,6 +19,7 @@ public:
     bool insert(int index, int value);
     void deleteLast();
     void deleteFirst();
+    void deleteNode(int index);
     void printList();
     void getHead() const;
     void getTail() const;
@@ -138,6 +139,18 @@ bool LinkedList::insert(int index, int value)
     return true;
 }
 
+void LinkedList::deleteNode(int index)
+{
+    if(index < 0 || index >= length) return;
+    if(index == 0) return deleteFirst();
+    if(index == length-1) return deleteLast();
+    Node *prev = get(index-1);
+    Node *temp = prev->next;
+    prev->next = temp->next;
+    delete temp;
+    length--;
+}
+
 void LinkedList::printList()
 {
     Node *temp = head;
@@ -171,7 +184,7 @@ int main()
     myLinkedList->printList();
     cout << endl;
     
-    myLinkedList->insert(1, 1);
+    myLinkedList->deleteNode(1);
     
     myLinkedList->printList();
     
