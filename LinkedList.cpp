@@ -26,6 +26,7 @@ public:
     void getLength() const;
     Node *get(int index);
     bool set(int index, int value);
+    void reverse();
 };
 
 LinkedList::LinkedList(int value)
@@ -151,6 +152,22 @@ void LinkedList::deleteNode(int index)
     length--;
 }
 
+void LinkedList::reverse()
+{
+    Node *temp = head;
+    head = tail;
+    tail = temp;
+    Node* after = temp->next;
+    Node* before = nullptr;
+    for(int i = 0; i < length; i++)
+    {
+        after = temp->next;
+        temp->next = before;
+        before = temp;
+        temp = after;
+    }
+}
+
 void LinkedList::printList()
 {
     Node *temp = head;
@@ -176,15 +193,15 @@ void LinkedList::getLength() const
 
 int main()
 {
-    LinkedList *myLinkedList = new LinkedList(11);
+    LinkedList *myLinkedList = new LinkedList(1);
+    myLinkedList->append(2);
     myLinkedList->append(3);
-    myLinkedList->append(23);
-    myLinkedList->append(7);
+    myLinkedList->append(4);
     
     myLinkedList->printList();
     cout << endl;
     
-    myLinkedList->deleteNode(1);
+    myLinkedList->reverse();
     
     myLinkedList->printList();
     
