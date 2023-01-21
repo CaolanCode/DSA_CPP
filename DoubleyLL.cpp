@@ -19,12 +19,11 @@ public:
     Node *get(int index);
     bool set(int index, int value);
     bool insert(int index, int value);
+    void deleteNode(int index);
     void printList();
     void getHead();
     void getTail();
     void getLength();
-    
-    
 };
 
 DoublyLinkedList::DoublyLinkedList(int value)
@@ -86,7 +85,7 @@ void DoublyLinkedList::deleteFirst()
 
 Node* DoublyLinkedList::get(int index)
 {
-    if(index < length || index >= length) return nullptr;
+    if(index < 0 || index >= length) return nullptr;
     Node *temp = head;
     if(index < length/2) {
         for(int i = 0; i < index; i++) temp = temp->next;
@@ -120,12 +119,27 @@ bool DoublyLinkedList::insert(int index, int value)
         Node *newNode = new Node(value);
         Node *before = get(index-1);
         Node *after = before->next;
-        before->next = newNode;
-        after->prev = newNode;
         newNode->prev = before;
         newNode->next = after;
+        before->next = newNode;
+        after->prev = newNode;
+        length++;
     }
     return true;
+}
+
+void DoublyLinkedList::deleteNode(int index)
+{
+    if(index < 0 || index >= length) return;
+    else if(index == 0) return deleteFirst();
+    else if(index == length-1) return deleteLast();
+    else {
+        Node *temp = get(index);
+        temp->next->prev = temp->prev;
+        temp->prev->next = temp->next;
+        delete temp;
+        length--;
+    }
 }
 
 void DoublyLinkedList::printList()
@@ -151,4 +165,25 @@ void DoublyLinkedList::getTail()
 void DoublyLinkedList::getLength()
 {
     cout << "Length: " << length << endl;
+}
+
+int main()
+{
+    DoublyLinkedList *myDLL = new DoublyLinkedList(1);
+    myDLL->append(2);
+    myDLL->prepend(0);
+    myDLL->printList();
+    cout << endl;
+    myDLL->insert(1, 3);
+    myDLL->printList();
+    cout << endl;
+    myDLL->deleteLast();
+    myDLL->deleteFirst();
+    myDLL->printList();
+    cout << endl;
+    myDLL->deleteNode(1);
+    myDLL->printList();
+    cout << endl;
+    
+    return 0;
 }
