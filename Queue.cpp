@@ -32,6 +32,7 @@ public:
     void getLast();
     void getLength();
     void printQueue();
+    void enqueue(int value);
 };
 
 Queue::Queue(int value)
@@ -39,6 +40,17 @@ Queue::Queue(int value)
     Node *newNode = new Node(value);
     first = last = newNode;
     length = 1;
+}
+
+void Queue::enqueue(int value)
+{
+    Node *newNode = new Node(value);
+    if(length == 0) first = last = newNode;
+    else {
+        last->next = newNode;
+        last = newNode;
+    }
+    length++;
 }
 
 void Queue::printQueue()
@@ -68,10 +80,8 @@ void Queue::getLength()
 
 int main()
 {
-    Queue *myQueue = new Queue(7);
-    myQueue->getLength();
-    myQueue->getFirst();
-    myQueue->getLast();
+    Queue *myQueue = new Queue(1);
+    myQueue->enqueue(2);
     myQueue->printQueue();
     
     return 0;
