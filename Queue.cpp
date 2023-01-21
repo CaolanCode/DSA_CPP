@@ -33,6 +33,7 @@ public:
     void getLength();
     void printQueue();
     void enqueue(int value);
+    int dequeue();
 };
 
 Queue::Queue(int value)
@@ -51,6 +52,20 @@ void Queue::enqueue(int value)
         last = newNode;
     }
     length++;
+}
+
+int Queue::dequeue()
+{
+    if(length == 0) return INT_MIN;
+    Node *temp = first;
+    int dequeueValue = first->value;
+    if(length == 1) first = last = nullptr;
+    else {
+        first = first->next;
+    }
+    length--;
+    delete temp;
+    return dequeueValue;
 }
 
 void Queue::printQueue()
@@ -83,6 +98,10 @@ int main()
     Queue *myQueue = new Queue(1);
     myQueue->enqueue(2);
     myQueue->printQueue();
+    cout << "Dequeue value: " << myQueue->dequeue() << endl;
+    cout << "Dequeue value: " << myQueue->dequeue() << endl;
+    cout << "Dequeue value: " << myQueue->dequeue() << endl;
+    
     
     return 0;
 }
