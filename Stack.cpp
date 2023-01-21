@@ -29,6 +29,7 @@ class Stack
 public:
     Stack(int value);
     void push(int value);
+    int pop();
     void getTop();
     void getHeight();
 };
@@ -48,6 +49,17 @@ void Stack::push(int value)
     height++;
 }
 
+int Stack::pop()
+{
+    if(height == 0) return INT_MIN;
+    Node *temp = top;
+    int poppedValue = top->value;
+    top = top->next;
+    delete temp;
+    height--;
+    return poppedValue;
+}
+
 void Stack::getTop()
 {
     cout << "Top: " << top->value << endl;
@@ -56,4 +68,16 @@ void Stack::getTop()
 void Stack::getHeight()
 {
     cout << "Top: " << height << endl;
+}
+
+int main()
+{
+    Stack *myStack = new Stack(1);
+    myStack->push(2);
+    
+    cout << "Pop: " << myStack->pop() << endl;
+    cout << "Pop: " << myStack->pop() << endl;
+    cout << "Pop: " << myStack->pop() << endl;
+    
+    return 0;
 }
