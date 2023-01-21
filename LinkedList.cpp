@@ -2,7 +2,7 @@
     List list class
  */
 #include <iostream>
-#include "Node.cpp"
+#include "NodeLL.cpp"
 using std::cout;
 using std::endl;
 
