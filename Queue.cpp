@@ -16,10 +16,6 @@ public:
         this->value = value;
         next = nullptr;
     }
-    void getFirst();
-    void getLast();
-    void getLength();
-    
 };
 
 /*
@@ -35,7 +31,7 @@ public:
     void getFirst();
     void getLast();
     void getLength();
-    
+    void printQueue();
 };
 
 Queue::Queue(int value)
@@ -43,6 +39,16 @@ Queue::Queue(int value)
     Node *newNode = new Node(value);
     first = last = newNode;
     length = 1;
+}
+
+void Queue::printQueue()
+{
+    Node *temp = first;
+    while(temp)
+    {
+        cout << temp->value << endl;
+        temp = temp->next;
+    }
 }
 
 void Queue::getFirst()
@@ -66,6 +72,7 @@ int main()
     myQueue->getLength();
     myQueue->getFirst();
     myQueue->getLast();
+    myQueue->printQueue();
     
     return 0;
 }
