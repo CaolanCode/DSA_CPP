@@ -18,6 +18,7 @@ public:
     bool addEdge(string vertex1, string vertex2);
     bool removeEdge(string vertex1, string vertex2);
     bool removeVertex(string vertex);
+    void printGraph();
 };
 
 bool Graph::addVertex(string vertex)
@@ -60,9 +61,29 @@ bool Graph::removeVertex(string vertex)
     return true;
 }
 
+void Graph::printGraph()
+{
+    for(auto [vertex, edges] : adjList)
+    {
+        cout << vertex << ": [ ";
+        for(auto edge : edges)
+        {
+            cout << edge << " ";
+        }
+        cout << "]" << endl;
+    }
+}
+
 int main()
 {
     Graph *myGraph = new Graph();
-    myGraph->addVertex("A");
+    myGraph->addVertex("A");
+    myGraph->addVertex("B");
+    myGraph->addVertex("C");
+    myGraph->addEdge("A", "B");
+    myGraph->addEdge("A", "C");
+    
+    myGraph->printGraph();
+    
     return 0;
 }
