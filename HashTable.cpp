@@ -2,9 +2,11 @@
     Hash Table
 */
 #include <iostream>
+#include <vector>
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 class Node
 {
@@ -29,6 +31,7 @@ public:
     int hash(string key);
     void set(string key, int value);
     int get(string key);
+    vector<string> keys();
 };
 
 int HashTable::hash(string key)
@@ -67,6 +70,22 @@ int HashTable::get(string key)
     return 0;
 }
 
+vector<string> HashTable::keys()
+{
+    vector<string> allKeys;
+    for(int i = 0; i < SIZE; i++)
+    {
+        Node *temp = dataMap[i];
+        while(temp)
+        {
+            allKeys.push_back(temp->key);
+            temp = temp->next;
+        }
+        
+    }
+    return allKeys;
+}
+
 void HashTable::printTable()
 {
     for(int i = 0; i < SIZE; i++)
@@ -91,7 +110,11 @@ int main()
     myHashTable->set("Lumber", 80);
     myHashTable->set("Bolts", 200);
     myHashTable->set("Screws", 140);
-    myHashTable->printTable();
+    
+    vector<string> myKeys = myHashTable->keys();
+    
+    for(int i = 0; i < myKeys.size(); i++) cout << myKeys[i] << ", ";
+    cout << endl;
     
     return 0;
 }
