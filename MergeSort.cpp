@@ -6,66 +6,65 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-void mergeArrays(int x[], int y[], int arr[], int start, int end);
-void mergeSort(int arr[], int start, int end);
+void merge(int arr[], int leftIndex, int midIndex, int rightIndex);
 
 int main()
 {
-    int arr[] = {3,21,54,1,43,5,65};
+    int arr[] = {3,21,54,63,2,5,65,79};
     
-    mergeSort(arr, 0, 6);
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int leftIndex = 0;
+    int rightIndex = size - 1;
+    int midIndex = (size / 2) - 1;
     
-    for(int i = 0; i < 7; i++) cout << arr[i] << ", ";
+    merge(arr, leftIndex, midIndex, rightIndex);
+    
+    
+    for(int i = 0; i < size; i++) cout << arr[i] << ", ";
     
     return 0;
 }
 
-void mergeSort(int arr[], int start, int end)
-{
-    if(start >= end) return;
-    
-    int mid = (start + end) / 2;
-    int x[100], y[100];
-    for(int i = 0; i <= mid; i++) x[i] = arr[i];
-    for(int i = mid+1; i <= end; i++) y[i] = arr[i];
-    
-    mergeSort(x, start, mid);
-    mergeSort(y, mid+1, end);
-    mergeArrays(x, y, arr, start, end);
-}
 
-void mergeArrays(int x[], int y[], int arr[], int start, int end)
+void merge(int arr[], int leftIndex, int midIndex, int rightIndex)
 {
-    int mid = (start + end) / 2;
-    int i, j, k;
-    i = k = start;
-    j = mid + 1;
+    int leftArraySize = midIndex - leftIndex + 1;
+    int rightArraySize = rightIndex - midIndex;
+    int leftArray[leftArraySize];
+    int rightArray[rightArraySize];
     
-    while(i <= mid && j <= end)
+    for(int i = 0; i < leftArraySize; i++) leftArray[i] = arr[leftIndex + i];
+    
+    for(int j = 0; j < rightArraySize; j++) rightArray[j] = arr[midIndex + 1 + j];
+    
+    int index = leftIndex;
+    int i, j;
+    i = j = 0;
+    
+    while(i < leftArraySize && j < rightArraySize)
     {
-        if(x[i] < y[j]) {
-            arr[k] = x[i];
+        if(leftArray[i] <= rightArray[j]) {
+            arr[index] = leftArray[i];
+            index++;
             i++;
-            k++;
         } else {
-            arr[k] = y[j];
+            arr[index] = rightArray[j];
+            index++;
             j++;
-            k++;
         }
     }
     
-    while(i <= mid)
+    while(i < leftArraySize)
     {
-        arr[k] = x[i];
+        arr[index] = leftArray[i];
+        index++;
         i++;
-        k++;
     }
     
-    while(j <= end)
+    while(j < rightArraySize)
     {
-        arr[k] = y[j];
+        arr[index] = rightArray[j];
+        index++;
         j++;
-        k++;
     }
-    
 }
