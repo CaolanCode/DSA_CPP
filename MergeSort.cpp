@@ -7,17 +7,17 @@ using std::endl;
 using std::cin;
 
 void merge(int arr[], int leftIndex, int midIndex, int rightIndex);
+void mergeSort(int arr[], int leftIndex, int rightIndex);
 
 int main()
 {
-    int arr[] = {3,21,54,63,2,5,65,79};
+    int arr[] = {3,1,4,2};
     
     int size = sizeof(arr) / sizeof(arr[0]);
     int leftIndex = 0;
     int rightIndex = size - 1;
-    int midIndex = (size / 2) - 1;
     
-    merge(arr, leftIndex, midIndex, rightIndex);
+    mergeSort(arr, leftIndex, rightIndex);
     
     
     for(int i = 0; i < size; i++) cout << arr[i] << ", ";
@@ -67,4 +67,15 @@ void merge(int arr[], int leftIndex, int midIndex, int rightIndex)
         index++;
         j++;
     }
+}
+
+void mergeSort(int arr[], int leftIndex, int rightIndex)
+{
+    if(leftIndex >= rightIndex) return;
+    
+    int midIndex = leftIndex + (rightIndex - leftIndex) / 2;
+    mergeSort(arr, leftIndex, midIndex);
+    mergeSort(arr, midIndex+1, rightIndex);
+    
+    merge(arr, leftIndex, midIndex, rightIndex);
 }
