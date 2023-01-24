@@ -2,10 +2,12 @@
     Return true if a string is a valid anagram of another
  */
 #include <iostream>
+#include <unordered_map>
 
 using std::cout;
 using std::endl;
 using std::string;
+using std::unordered_map;
 
 bool anagram(string s, string t);
 
@@ -24,13 +26,15 @@ bool anagram(string s, string t)
 {
     if(s.size() != t.size()) return false;
     
-    sort(s.begin(), s.end());
-    sort(t.begin(), t.end());
+    unordered_map<char, int> s2, t2;
     
     for(int i = 0; i < s.size(); i++)
     {
-        if(s[i] != t[i]) return false;
+        s2[s[i]]++;
+        t2[t[i]]++;
     }
     
-    return true;
+    if(s2 == t2) return true;
+    
+    return false;
 }
