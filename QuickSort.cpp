@@ -7,39 +7,39 @@ using std::endl;
 using std::cin;
 using std::swap;
 
-void quickSort(int arr[], int start, int end);
-int partition(int arr[], int start, int end);
+void quickSort(int arr[], int leftIndex, int rightIndex);
+int pivot(int arr[], int pivotIndex, int endIndex);
 
 int main()
 {
-    int arr[] = {5,4,22,6,34,56,2};
+    int arr[] = {4,6,1,7,3,2,5};
     
-    quickSort(arr, 0, 6);
+    int size = sizeof(arr) / sizeof(arr[0]);
     
-    for(int i = 0; i < 7; i++) cout << arr[i] << ", ";
+    int returnIndex = pivot(arr, 0, size-1);
+    
+    for(int i = 0; i < size; i++) cout << arr[i] << ", ";
+    cout << endl;
+    cout << returnIndex << endl;
     
     return 0;
 }
 
-void quickSort(int arr[], int start, int end)
+int pivot(int arr[], int pivotIndex, int endIndex)
 {
-    if(start >= end) return;
-    
-    int p = partition(arr, start, end);
-    quickSort(arr, start, p-1);
-    quickSort(arr, p+1, end);
-    
+    int swapIndex = pivotIndex;
+    for(int i = pivotIndex + 1; i <= endIndex; i++)
+    {
+        if(arr[i] < arr[pivotIndex]) {
+            swapIndex++;
+            swap(arr[i], arr[swapIndex]);
+        }
+    }
+    swap(arr[swapIndex], arr[pivotIndex]);
+    return swapIndex;
 }
 
-int partition(int arr[], int start, int end)
+void quickSort(int arr[], int leftIndex, int rightIndex)
 {
-    int index = end;
     
-    for(int i = end-1; i >= 0; i--)
-    {
-        if(arr[end] < arr[i]) index = i;
-    }
-    swap(arr[index], arr[end]);
-    
-    return index;
 }
