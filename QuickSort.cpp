@@ -16,11 +16,10 @@ int main()
     
     int size = sizeof(arr) / sizeof(arr[0]);
     
-    int returnIndex = pivot(arr, 0, size-1);
+    quickSort(arr, 0, size-1);
     
     for(int i = 0; i < size; i++) cout << arr[i] << ", ";
     cout << endl;
-    cout << returnIndex << endl;
     
     return 0;
 }
@@ -41,5 +40,10 @@ int pivot(int arr[], int pivotIndex, int endIndex)
 
 void quickSort(int arr[], int leftIndex, int rightIndex)
 {
+    if(leftIndex >= rightIndex) return;
+    
+    int pivotIndex = pivot(arr, leftIndex, rightIndex);
+    quickSort(arr, leftIndex, pivotIndex-1);
+    quickSort(arr, pivotIndex+1, rightIndex);
     
 }
