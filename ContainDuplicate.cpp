@@ -33,9 +33,7 @@ bool duplicates(int arr[], int arraySize)
         st.insert(arr[i]);
     }
     
-    int setSize = st.size();
-    
-    if(setSize < arraySize) return true;
+    if(st.size() < arraySize) return true;
         
     return false;
 }
