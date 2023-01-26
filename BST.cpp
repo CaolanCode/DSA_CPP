@@ -32,8 +32,8 @@ public:
     void DFSPreOrder(Node *currentNode);
     void DFSPostOrder();
     void DFSPostOrder(Node *currentNode);
-    void DFSInOder();
-    void DFSInOder(Node *currentNode);
+    void DFSInOrder();
+    void DFSInOrder(Node *currentNode);
 };
 
 BinarySearchTree::BinarySearchTree()
@@ -127,16 +127,16 @@ void BinarySearchTree::DFSPostOrder(Node *currentNode)
     cout << currentNode->value << " ";
 }
 
-void BinarySearchTree::DFSInOder()
+void BinarySearchTree::DFSInOrder()
 {
-    DFSInOder(root);
+    DFSInOrder(root);
 }
 
-void BinarySearchTree::DFSInOder(Node *currentNode)
+void BinarySearchTree::DFSInOrder(Node *currentNode)
 {
-    if(currentNode->left) DFSPreOrder(currentNode->left);
+    if(currentNode->left) DFSInOrder(currentNode->left);
     cout << currentNode->value << " ";
-    if(currentNode->right) DFSPreOrder(currentNode->right);
+    if(currentNode->right) DFSInOrder(currentNode->right);
     
 }
 
@@ -163,6 +163,9 @@ int main()
     cout << endl;
     
     myBST->DFSPostOrder();
+    cout << endl;
+    
+    myBST->DFSInOrder();
     cout << endl;
     
     return 0;
