@@ -28,6 +28,8 @@ public:
     bool insert(int value);
     bool contains(int value);
     void BFS();
+    void DFSPreOrder();
+    void DFSPreOrder(Node *currentNode);
 };
 
 BinarySearchTree::BinarySearchTree()
@@ -98,6 +100,18 @@ void BinarySearchTree::BFS()
     
 }
 
+void BinarySearchTree::DFSPreOrder()
+{
+    DFSPreOrder(root);
+}
+
+void BinarySearchTree::DFSPreOrder(Node *currentNode)
+{
+    cout << currentNode->value << " ";
+    if(currentNode->left) DFSPreOrder(currentNode->left);
+    if(currentNode->right) DFSPreOrder(currentNode->right);
+}
+
 int main()
 {
     BinarySearchTree *myBST = new BinarySearchTree();
@@ -105,6 +119,9 @@ int main()
     myBST->insert(21);
     myBST->insert(76);
     myBST->insert(18);
+    myBST->insert(53);
+    myBST->insert(2);
+    myBST->insert(32);
     
     cout << myBST->root->left->value << endl;
     
@@ -112,6 +129,9 @@ int main()
     cout << "Contains 17: " << myBST->contains(17) << endl;
     
     myBST->BFS();
+    cout << endl;
+    
+    myBST->DFSPreOrder();
     cout << endl;
     
     return 0;
