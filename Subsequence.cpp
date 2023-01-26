@@ -1,5 +1,5 @@
 /*
-    
+    check if s is a subsequence of t
  */
 #include <iostream>
 using std::cout;
