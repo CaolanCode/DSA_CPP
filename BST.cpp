@@ -2,8 +2,10 @@
     Binary Search Tree
  */
 #include <iostream>
+#include <queue>
 using std::cout;
 using std::endl;
+using std::queue;
 
 class Node
 {
@@ -25,6 +27,7 @@ public:
     BinarySearchTree();
     bool insert(int value);
     bool contains(int value);
+    void BFS();
 };
 
 BinarySearchTree::BinarySearchTree()
@@ -75,6 +78,25 @@ bool BinarySearchTree::contains(int value)
     return false;
 }
 
+void BinarySearchTree::BFS()
+{
+    queue<Node*> myQueue;
+    myQueue.push(root);
+    
+    while(myQueue.size() > 0)
+    {
+        Node *currentNode = myQueue.front();
+        myQueue.pop();
+        cout << currentNode->value << " ";
+        if(currentNode->left) {
+            myQueue.push(currentNode->left);
+        }
+        if(currentNode->right) {
+            myQueue.push(currentNode->right);
+        }
+    }
+    
+}
 
 int main()
 {
@@ -88,6 +110,9 @@ int main()
     
     cout << "Contains 27: " << myBST->contains(21) << endl;
     cout << "Contains 17: " << myBST->contains(17) << endl;
+    
+    myBST->BFS();
+    cout << endl;
     
     return 0;
 }
