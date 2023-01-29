@@ -28,6 +28,7 @@ bool anagram(string s, string t)
     
     unordered_map<char, int> s2, t2;
     
+    // [char, number of occurances]
     for(int i = 0; i < s.size(); i++)
     {
         s2[s[i]]++;
