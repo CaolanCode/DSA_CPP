@@ -2,11 +2,11 @@
  Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
  */
 #include <iostream>
-#include <unordered_set>
+#include <set>
 #include <vector>
 using std::cout;
 using std::endl;
-using std::unordered_set;
+using std::set;
 using std::vector;
 using std::max;
 
@@ -14,7 +14,7 @@ int longestConsecutive(vector<int>& nums);
         
 int main()
 {
-    vector<int> nums = {100,4,200,1,3,2};
+    vector<int> nums = {0,3,7,2,5,8,4,6,0,1};
     
     cout << longestConsecutive(nums) << endl;
     
@@ -23,13 +23,14 @@ int main()
 
 int longestConsecutive(vector<int>& nums)
 {
-    unordered_set<int> set(nums.begin(), nums.end());
+    set<int> set(nums.begin(), nums.end());
     
     int current = 1, ans = 0;
-    for(int i = 0; i < set.size(); i++)
+    for(auto i = set.begin(); i != set.end(); i++)
     {
-        if(set.find(nums[i]-1) == set.end()) {
-            while(set.find(nums[i] + current) != set.end())
+        int ele = *i;
+        if(set.find(ele - 1) == set.end()) {
+            while(set.find(ele + current) != set.end())
                 current++;
             
             ans = max(current, ans);
