@@ -14,7 +14,7 @@ int longestConsecutive(vector<int>& nums);
         
 int main()
 {
-    vector<int> nums = {0,3,7,2,5,8,4,6,0,1};
+    vector<int> nums = {4,0,-4,-2,2,5,2,0,-8,-8,-8,-8,-1,7,4,5,5,-4,6,6,-3};
     
     cout << longestConsecutive(nums) << endl;
     
@@ -29,6 +29,7 @@ int longestConsecutive(vector<int>& nums)
     for(auto i = set.begin(); i != set.end(); i++)
     {
         int ele = *i;
+        current = 1;
         if(set.find(ele - 1) == set.end()) {
             while(set.find(ele + current) != set.end())
                 current++;
